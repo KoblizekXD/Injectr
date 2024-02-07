@@ -1,6 +1,7 @@
 plugins {
     id("java")
     `java-gradle-plugin`
+    `maven-publish`
 }
 
 group = "lol.koblizek"
@@ -31,4 +32,17 @@ gradlePlugin {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "lol.koblizek"
+            artifactId = "injectr-plugin"
+            from(components["java"])
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
